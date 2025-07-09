@@ -3,7 +3,6 @@ package com.finance.expense_tracker.models;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,11 +22,8 @@ public class Expense {
 
     private String description;
     private Double amount;
+    private String category;
     private LocalDateTime date;
-
-    @ManyToOne
-    @JsonManagedReference
-    private Category category;
 
     @ManyToOne
     @JsonBackReference

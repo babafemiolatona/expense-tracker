@@ -10,7 +10,6 @@ public class CreateExpenseDto {
     private String description;
     private Double amount;
     private LocalDateTime date;
-    private Long categoryId;
-    private Long userId;
+    private String category;
 
 }
