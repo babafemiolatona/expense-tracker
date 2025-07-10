@@ -58,7 +58,7 @@ public class ExpenseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<ExpenseDto> updateExpense(
             @PathVariable Long id,
             @RequestBody CreateExpenseDto updatedDto,
