@@ -22,8 +22,11 @@ import com.finance.expense_tracker.models.Expense;
 import com.finance.expense_tracker.models.User;
 import com.finance.expense_tracker.service.ExpenseService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "2. Expenses", description = "Handles expense-related operations")
 @RestController
-@RequestMapping("/api/expenses")
+@RequestMapping("/api/v1/expenses")
 public class ExpenseController {
 
     @Autowired

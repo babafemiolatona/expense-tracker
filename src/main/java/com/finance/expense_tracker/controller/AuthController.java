@@ -18,10 +18,12 @@ import com.finance.expense_tracker.models.LoginRequest;
 import com.finance.expense_tracker.models.LoginResponse;
 import com.finance.expense_tracker.service.AuthService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@Tag(name = "1. Authentication", description = "Handles user registration and login")
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     @Autowired

@@ -2,6 +2,9 @@ package com.finance.expense_tracker.models;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
@@ -23,7 +26,14 @@ public class Expense {
     private String description;
     private Double amount;
     private String category;
+
     private LocalDateTime date;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     @JsonBackReference

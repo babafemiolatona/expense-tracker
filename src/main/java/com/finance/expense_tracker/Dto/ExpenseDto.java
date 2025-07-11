@@ -10,7 +10,9 @@ public class ExpenseDto {
     private Long id;
     private String description;
     private Double amount;
-    private LocalDateTime date;
     private String category;
+    private LocalDateTime date;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
 }
