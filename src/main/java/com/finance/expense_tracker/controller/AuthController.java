@@ -1,5 +1,8 @@
 package com.finance.expense_tracker.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +39,12 @@ public class AuthController {
             LoginResponse response = authService.login(request);
             return ResponseEntity.ok(response);
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Invalid username or password");
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Login failed");
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
