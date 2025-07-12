@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,7 +26,7 @@ public class SecurityConfig {
             .csrf().disable()
             .authorizeHttpRequests()
             .requestMatchers(
-                "/api/auth/**",
+                "/api/v1/auth/**",
                 "v3/api-docs/**",
                 "swagger-ui/**",
                 "swagger-ui.html"
@@ -33,8 +34,9 @@ public class SecurityConfig {
             ).permitAll()
             .anyRequest().authenticated()
             .and()
-            .httpBasic(); // Use basic auth for now
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
