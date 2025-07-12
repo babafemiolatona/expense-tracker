@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.finance.expense_tracker.Dto.CreateBudgetDto;
 import com.finance.expense_tracker.dao.BudgetDao;
+import com.finance.expense_tracker.exceptions.ResourceNotFoundException;
 import com.finance.expense_tracker.mapper.BudgetMapper;
 import com.finance.expense_tracker.models.Budget;
 import com.finance.expense_tracker.models.User;
@@ -24,7 +25,7 @@ public class BudgetService {
 
     public Budget getBudgetById(Long id, User user) {
         Budget budget = budgetDao.findById(id)
-            .orElseThrow(() -> new RuntimeException("Budget not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Budget not found with id: " + id));
 
         if (!budget.getUser().getId().equals(user.getId())) {
             throw new AccessDeniedException("Not allowed to access this budget");
@@ -40,7 +41,7 @@ public class BudgetService {
 
     public Budget updateBudget(Long id, CreateBudgetDto updatedBudget, User user) {
         Budget existing = budgetDao.findById(id)
-            .orElseThrow(() -> new RuntimeException("Budget not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Budget not found with id: " + id));
 
         if (!existing.getUser().getId().equals(user.getId())) {
             throw new AccessDeniedException("Not allowed to update this budget");
@@ -57,7 +58,7 @@ public class BudgetService {
 
     public void deleteBudget(Long id, User user) {
         Budget budget = budgetDao.findById(id)
-            .orElseThrow(() -> new RuntimeException("Budget not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Budget not found with id: " + id));
 
         if (!budget.getUser().getId().equals(user.getId())) {
             throw new AccessDeniedException("Not allowed to delete this budget");

@@ -22,6 +22,7 @@ import com.finance.expense_tracker.models.Budget;
 import com.finance.expense_tracker.models.User;
 import com.finance.expense_tracker.service.BudgetService;
 
+
 @RestController
 @RequestMapping("/api/v1/budgets")
 public class BudgetController {

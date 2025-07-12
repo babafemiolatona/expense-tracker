@@ -25,7 +25,7 @@ public class ExpenseService {
 
     public Expense getExpenseById(Long id, User user) {
         Expense expense = expenseDao.findById(id)
-            .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Expense not found with id: " + id));
 
         if (!expense.getUser().getId().equals(user.getId())) {
             throw new AccessDeniedException("Not allowed to access this expense");
@@ -58,7 +58,7 @@ public class ExpenseService {
 
     public void deleteExpense(Long id, User user) {
         Expense expense = expenseDao.findById(id)
-            .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Expense not found with id: " + id));
 
         if (!expense.getUser().getId().equals(user.getId())) {
             throw new AccessDeniedException("Not allowed to delete this expense");
